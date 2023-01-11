@@ -23,6 +23,11 @@ export class UserRepository {
     return await this.typeOrmRepository.query(query);
   }
 
+  async updateBalance(user: UserDto): Promise<UserDto> {
+    const query = this.userQueryBuilder.buildQueryUpdateBalance(user.balance, user.walletId);
+    return await this.typeOrmRepository.query(query);
+  }
+
   createUser(user: UserDto): Promise<UserDto> {
     return this.typeOrmRepository.save(user);
   }

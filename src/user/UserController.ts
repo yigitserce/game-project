@@ -31,4 +31,10 @@ export class UserController {
   public setPaymentParams(@Body() user:UserDto): PaymentParamsDto {
     return this.userService.setPaymentParams(user);
   }
+
+  @Post('balance')
+  public async updateBalance(@Body() user: UserDto): Promise<UserDto> {
+    return await this.userService.updateBalance(user);
+  }
 }
+

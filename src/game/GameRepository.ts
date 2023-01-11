@@ -6,6 +6,7 @@ import { GameEntity } from "./models/entity/GameEntity";
 import { GameQueryBuilder } from "./GameQueryBuilder";
 import { GameDto } from "./models/GameDto";
 import { PlayerDto } from "./models/PlayerDto";
+import { WinnersDto } from "./models/WinnersDto";
 
 @Injectable()
 export class GameRepository {
@@ -53,6 +54,11 @@ export class GameRepository {
 
   async updateRatios(id: string, ratio: number[]): Promise<GameDto> {
     const query = this.gameQueryBuilder.buildUpdateRatiosQuery(id, ratio);
+    return await this.typeOrmRepository.query(query);
+  }
+
+  async deleteGame(id: string): Promise<GameDto> {
+    const query = this.gameQueryBuilder.buildQueryDeleteGame(id);
     return await this.typeOrmRepository.query(query);
   }
 }

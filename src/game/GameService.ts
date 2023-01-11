@@ -4,6 +4,7 @@ import { GameRepository } from "./GameRepository";
 import { GameDto } from "./models/GameDto";
 import { gameConstants } from "./constants/game.constants";
 import { PlayerDto } from "./models/PlayerDto";
+import { WinnersDto } from "./models/WinnersDto";
 
 @Injectable()
 export class GameService {
@@ -18,7 +19,8 @@ export class GameService {
       ratios:await ratioValues,
       users:[],
       dynamic_ratio:1.6,
-      ref_value:gameInfo.refValue
+      ref_value:gameInfo.refValue,
+      time:gameInfo.time
     };
     return await this.gameRepository.createGame(game);
   }
@@ -64,5 +66,22 @@ export class GameService {
     const updatedGame = await this.gameRepository.updateUsers(id, playerInfo);
     await this.analyzeDynamicRatio(id);
     return updatedGame;
+  }
+
+  async deleteGame(id: string): Promise<GameDto> {
+    return await this.gameRepository.deleteGame(id);
+  }
+
+
+  private jsonParser (str: string, indexFirst:number) {
+    return str[0].slice(1,-1).split(',')[indexFirst].split(':')[1];
+  }
+
+  async getWinners(): Promise<WinnersDto[]> {
+    const games = await this.gameRepository.getAllGames();
+    games.forEach(game => {
+      console.log(this.jsonParser(game['users'], 2));
+    });
+    return [] as WinnersDto[];
   }
 }

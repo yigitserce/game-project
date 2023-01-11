@@ -26,4 +26,7 @@ export class GameEntity {
 
   @Column('double precision')
   ref_value:number;
+
+  @Column('bigint', { nullable: true })
+  time:number;
 }

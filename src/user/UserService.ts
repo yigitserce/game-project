@@ -28,8 +28,12 @@ export class UserService {
     return await this.userRepository.createUser(user);
   }
 
+  async updateBalance(user: UserDto): Promise<UserDto> {
+    return await this.userRepository.updateBalance(user);
+  }
+
   setPaymentParams(user: UserDto): PaymentParamsDto {
-    //value will get from another endpoint
+    //value will be taken from another endpoint
     const value = 0.05 * userConstants.coefficient;
     return {
       to:userConstants.caseWallet,

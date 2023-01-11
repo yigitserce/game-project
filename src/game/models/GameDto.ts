@@ -9,4 +9,5 @@ export class GameDto {
   users:PlayerDto[];
   dynamic_ratio:number;
   ref_value:number;
+  time:number;
 }

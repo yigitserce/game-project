@@ -16,4 +16,8 @@ export class UserQueryBuilder {
     return `SELECT * FROM public.${this.dbName}`;
   }
 
+
+  buildQueryUpdateBalance(balance: number, walletId: string): string {
+    return `UPDATE public.${this.dbName} SET "balance"=${balance} WHERE "walletId"= '${walletId}'`;
+  }
 }

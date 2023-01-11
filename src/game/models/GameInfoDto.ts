@@ -3,4 +3,5 @@ export class GameInfoDto {
   description:string;
   options:string[];
   refValue:number;
+  time:number;
 }
